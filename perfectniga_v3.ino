@@ -17,7 +17,7 @@
 #include "freertos/semphr.h"
 
 // ============================================================
-// PINLER
+// PINS
 // ============================================================
 #define SPI_SCK   23
 #define SPI_MISO  25
@@ -33,7 +33,7 @@
 #define NRF_CSN    10
 
 // ============================================================
-// TOUCH KALIBRASYON
+// TOUCH CALIBRATİON
 // ============================================================
 #define TS_MINX 200
 #define TS_MAXX 3800
@@ -47,7 +47,7 @@
 #define SCREEN_H 240
 
 // ============================================================
-// RENKLER
+// COLORS
 // ============================================================
 #define C_BG      ILI9341_BLACK
 #define C_FG      ILI9341_WHITE
@@ -59,7 +59,7 @@
 #define C_PURPLE  0xF81F
 
 // ============================================================
-// NESNELER
+// OBJECTS
 // ============================================================
 Adafruit_ILI9341 tft(&SPI, TFT_DC, TFT_CS, TFT_RST);
 XPT2046_Touchscreen ts(TOUCH_CS);
@@ -69,7 +69,7 @@ bool nrfOk = false;
 bool bleReady = false;
 
 // ============================================================
-// BUTTON STRUCT (EN ÜSTTE OLMALI)
+// BUTTON STRUCT
 // ============================================================
 struct Button {
   int16_t x, y, w, h;
@@ -78,7 +78,7 @@ struct Button {
 };
 
 // ============================================================
-// MENU BUTONLARI
+// MENU BUTTONS
 // ============================================================
 Button menuButtons[] = {
   {  5,  30, 100, 26, "WiFi Tara",   C_ACCENT},
@@ -106,7 +106,7 @@ const int MENU_COUNT = sizeof(menuButtons) / sizeof(menuButtons[0]);
 Button backBtn = { 230, 200, 80, 34, "GERI", C_ERR };
 
 // ============================================================
-// LOG SISTEMI
+// LOG SYSTEM
 // ============================================================
 #define LOG_MAX 40
 #define LOG_LINE_LEN 40
@@ -216,7 +216,7 @@ void waitRelease() {
 }
 
 // ============================================================
-// TFT YARDIMCI
+// TFT HELPER
 // ============================================================
 void drawStatusBar(const char* title, uint16_t color) {
   tft.fillRect(0, 0, SCREEN_W, 22, color);
@@ -271,7 +271,7 @@ void drawMenu() {
 }
 
 // ============================================================
-// 1 - WiFi TARAMA
+// 1 - WiFi SCAN
 // ============================================================
 void performWiFiScan() {
   drawHeader("WiFi Taraniyor...", C_ACCENT);
@@ -302,7 +302,7 @@ void performWiFiScan() {
 }
 
 // ============================================================
-// 2 - BLE TARAMA
+// 2 - BLE SCAN
 // ============================================================
 void performBLEScan() {
   drawHeader("BLE Taraniyor...", C_BAR);
@@ -408,7 +408,7 @@ void performNRFScan() {
 }
 
 // ============================================================
-// 4 - NRF SAYAC
+// 4 - NRF COUNTER
 // ============================================================
 void performNRFCounter() {
   drawHeader("NRF Sayac", C_PURPLE);
@@ -456,7 +456,7 @@ void performNRFCounter() {
 }
 
 // ============================================================
-// 5 - WiFi KANAL DETAY
+// 5 - WiFi CHANNEL DETAİLS
 // ============================================================
 void performWiFiDetail() {
   drawHeader("WiFi Ag Detaylari", C_BAR);
@@ -497,7 +497,7 @@ void performWiFiDetail() {
 }
 
 // ============================================================
-// 6 - DONANIM DURUMU
+// 6 - HARDWARE STATUS
 // ============================================================
 void performHardwareInfo() {
   drawHeader("Donanim Durumu", C_ACCENT);
@@ -529,7 +529,7 @@ void performHardwareInfo() {
 }
 
 // ============================================================
-// 7 - WiFi KANAL ANALIZ
+// 7 - WiFi CHANNEL ANALYSIS
 // ============================================================
 void performWiFiChannelAnalyzer() {
   drawHeader("WiFi Kanal Analiz", C_ACCENT);
@@ -607,7 +607,7 @@ void performWiFiChannelAnalyzer() {
 }
 
 // ============================================================
-// 8 - AYARLAR / SISTEM IZLEME / CANLI AG ANALIZI
+// 8 - SETTINGS / SYSTEM MONITORING / LIVE NETWORK ANALYSIS
 // ============================================================
 static bool backlightEnabled = true;
 static bool liveAutoRefresh = true;
@@ -778,7 +778,7 @@ void performLiveNetworkAnalysis() {
 }
 
 // ============================================================
-// 8 - HAKKINDA
+// 8 - ABOUT
 // ============================================================
 void performAbout() {
   drawHeader("Hakkinda", C_DIM);
