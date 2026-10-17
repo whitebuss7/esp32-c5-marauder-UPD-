@@ -1,4 +1,5 @@
 # Marauder C5 v2 — ESP32-C5 Wireless Analysis Toolkit
+#DFROBOT FİREBEETLE ESP32-C5
 
 A touchscreen-based wireless analysis and hardware monitoring project built around the **ESP32-C5**, **NRF24L01**, **ILI9341 TFT display**, and **XPT2046 touchscreen controller**.
 
