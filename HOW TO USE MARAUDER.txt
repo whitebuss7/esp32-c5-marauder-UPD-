@@ -1,0 +1,42 @@
+# Marauder C5 v2
+
+Bu projeyi ESP32-C5 kullanarak geliştirdim. Amacım, Wi-Fi ve Bluetooth taraması yapabilen, NRF24L01 modülüyle kablosuz sinyalleri inceleyebilen ve bütün bunları dokunmatik bir ekran üzerinden kontrol edebileceğim küçük bir cihaz ortaya çıkarmaktı.
+
+Projenin en sevdiğim tarafı, bütün özelliklerin tek bir cihazda toplanması. Sürekli bilgisayara bağlı kalmadan menüler arasında gezebiliyor, tarama yapabiliyor ve sonuçları doğrudan ekrandan görebiliyorsun.
+
+## Neler yapabiliyor?
+
+- **Wi-Fi tarama:** Çevredeki kablosuz ağları, sinyal güçlerini ve kullandıkları kanalları görüntüler.
+- **Bluetooth tarama:** Yakındaki BLE cihazlarını bulmaya ve reklam verilerindeki bilgileri incelemeye yarar.
+- **NRF24L01 analizi:** Desteklenen kanallardaki radyo aktivitesini gözlemlemeye ve alınan paketleri saymaya yardımcı olur.
+- **Sinyal grafikleri:** Wi-Fi sinyal gücünü ve kanal dağılımını görsel olarak takip etmeyi sağlar.
+- **Sistem izleme:** Bellek kullanımı, işlemci frekansı ve çalışma süresi gibi bilgileri gösterir.
+- **Dokunmatik arayüz:** Farklı özelliklere ekran üzerinden kolayca erişmeni sağlar.
+- **Hata ve log ekranı:** Donanım başlatma durumlarını ve tanılama mesajlarını görüntüler.
+
+## Kullanılan donanımlar
+
+Projede ana kontrolcü olarak ESP32-C5 kullandım. Wi-Fi ve BLE işlemleri bu kart üzerinden yürütülüyor. NRF24L01 modülü kablosuz analizde görev alırken, ILI9341 ekran ve XPT2046 dokunmatik kontrolcü de cihazın arayüzünü oluşturuyor.
+
+## Kullanılan kütüphaneler
+
+- **Arduino ESP32 Core:** ESP32-C5 üzerinde kodun çalışmasını ve temel donanım işlevlerini sağlar.
+- **Adafruit GFX:** Ekrana yazı, şekil ve grafik çizmek için kullanılır.
+- **Adafruit ILI9341:** TFT ekranı kontrol eder.
+- **XPT2046_Touchscreen:** Dokunmatik girişleri okumak için kullanılır.
+- **RF24:** NRF24L01 modülüyle haberleşmeyi sağlar.
+- **NimBLE-Arduino:** Bluetooth Low Energy işlemlerinde kullanılır.
+
+## Kurulum
+
+Projeyi çalıştırmak için Arduino IDE'yi ve ESP32 kart desteğini kurman gerekiyor. Daha sonra yukarıdaki kütüphaneleri yükleyip `.ino` dosyasını açabilirsin.
+
+Donanım bağlantılarını koddaki GPIO tanımlarına göre yaptıktan sonra uygun ESP32-C5 kartını ve portu seçerek kodu karta yükleyebilirsin. İlk çalıştırmada Serial Monitor üzerinden başlangıç mesajlarını kontrol etmek de sorunları bulmayı kolaylaştırır.
+
+Kullanılan kartın ve kütüphanelerin sürümlerine göre bazı düzenlemeler gerekebilir.
+
+## Geliştirme amacı
+
+Bu projeyi geliştirirken hedefim, kablosuz iletişim teknolojilerini ve ESP32 ile donanım kontrolünü daha iyi anlamak, öğrendiklerimi de çalışan bir projede bir araya getirmekti. İleride arayüzü geliştirmek, donanım hatalarını daha iyi raporlamak ve farklı analiz ekranları eklemek istiyorum.
+
+**Not:** Proje hâlâ geliştirmeye açık. Özelliklerin çalışması kullanılan donanıma ve yazılım sürümlerine bağlıdır. Kablosuz testleri yalnızca izinli ortamlarda gerçekleştirin.

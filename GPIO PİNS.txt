@@ -1,0 +1,62 @@
+## GPIO Bağlantıları
+
+Projede ESP32-C5 ana kontrolcü olarak kullanılıyor. TFT ekran, dokunmatik panel ve NRF24L01 modülü SPI haberleşme hattını ortak kullanıyor. Böylece her modül için ayrı ayrı SPI pinleri ayırmak yerine SCK, MISO ve MOSI hatlarını ortak kullanabiliyoruz.
+
+Her modülün kendine ait CS (Chip Select) pini bulunuyor. Bu sayede ESP32-C5, haberleşeceği modülü seçebiliyor.
+
+### Ortak SPI Bağlantıları
+
+| ESP32-C5 GPIO | Sinyal | Bağlanan pinler |
+|---|---|---|
+| GPIO 23 | SCK | TFT, Touch, NRF24L01 |
+| GPIO 25 | MISO | TFT, Touch, NRF24L01 |
+| GPIO 24 | MOSI | TFT, Touch, NRF24L01 |
+| GND | Toprak | Tüm modüllerin GND pinleri |
+
+### ILI9341 TFT Ekran
+
+| TFT pini | ESP32-C5 GPIO |
+|---|---|
+| CS | GPIO 4 |
+| DC | GPIO 2 |
+| RST | GPIO 3 |
+| LED / Backlight | GPIO 5 |
+| SCK | GPIO 23 |
+| MISO | GPIO 25 |
+| MOSI | GPIO 24 |
+| GND | GND |
+| VCC | Modülün teknik özelliklerine uygun besleme |
+
+### XPT2046 Dokunmatik Panel
+
+| Touch pini | ESP32-C5 GPIO |
+|---|---|
+| CS | GPIO 6 |
+| SCK | GPIO 23 |
+| MISO | GPIO 25 |
+| MOSI | GPIO 24 |
+| GND | GND |
+| VCC | Modülün teknik özelliklerine uygun besleme |
+
+### NRF24L01 Modülü
+
+| NRF24L01 pini | ESP32-C5 GPIO |
+|---|---|
+| CE | GPIO 9 |
+| CSN | GPIO 10 |
+| SCK | GPIO 23 |
+| MISO | GPIO 25 |
+| MOSI | GPIO 24 |
+| GND | GND |
+| VCC | 3.3V |
+
+### Bağlantı sırasında dikkat edilmesi gerekenler
+
+- NRF24L01 modülünü **5V ile beslemeyin**. Besleme gerilimi 3.3V olmalıdır.
+- Tüm modüllerin GND bağlantıları ortak olmalıdır.
+- Özellikle harici antenli NRF24L01 PA/LNA modellerinde güç kaynağının yeterli akım sağlayabildiğinden emin olun.
+- TFT ekranın LED/backlight pini doğrudan GPIO üzerinden sürülemiyorsa uygun bir sürücü devresi kullanın.
+- GPIO numaralarının kullandığınız ESP32-C5 kartında gerçekten mevcut olduğunu kontrol edin. Her geliştirme kartı aynı pin düzenine sahip değildir.
+- Bağlantıları tamamladıktan sonra kodu yüklemeden önce tüm güç ve sinyal hatlarını tekrar kontrol edin.
+
+**Not:** TFT ekran ve dokunmatik panel SPI hattını paylaşıyor. NRF24L01 de aynı haberleşme hatlarına bağlanıyor; ancak her modülün CS pini ayrı tutuluyor. Bu düzenleme, aynı SPI veri yollarının birden fazla çevre birimi tarafından kullanılmasını sağlıyor.
